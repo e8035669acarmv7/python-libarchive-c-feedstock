@@ -16,7 +16,7 @@ Current build status
 
 [![Linux](https://img.shields.io/circleci/project/github/conda-forge/python-libarchive-c-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/python-libarchive-c-feedstock)
 [![OSX](https://img.shields.io/travis/conda-forge/python-libarchive-c-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/python-libarchive-c-feedstock)
-![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/python-libarchive-c-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/python-libarchive-c-feedstock/branch/master)
 
 Current release info
 ====================
