@@ -4,4 +4,4 @@
 @if defined LIBARCHIVE (
     set "_CONDA_SET_LIBARCHIVE=%LIBARCHIVE%"
 )
-@set "LIBARCHIVE=%CONDA_PREFIX%\Library\lib\archive.lib"
+@set "LIBARCHIVE=%CONDA_PREFIX%\Library\bin\archive.dll"
