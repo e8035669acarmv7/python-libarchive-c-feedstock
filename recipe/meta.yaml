@@ -11,11 +11,7 @@ source:
     - 0001-Add-zstd-support.patch
 
 build:
-  number: 1001
-  script:
-    - set PYTHONHASHSEED=0  # [win]
-    - export PYTHONHASHSEED=0  # [not win]
-    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  number: 1002
 
 requirements:
   host:
