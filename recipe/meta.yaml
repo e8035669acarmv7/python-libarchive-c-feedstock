@@ -12,6 +12,10 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 0001-Add-zstd-support.patch
+  script:
+  - set PYTHONHASHSEED=0  # [win]
+  - export PYTHONHASHSEED=0  # [not win]
+  - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 build:
   number: 1003
