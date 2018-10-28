@@ -14,7 +14,7 @@ source:
     - 0001-Add-zstd-support.patch
 
 build:
-  number: 1003
+  number: 1004
   script:
   - set PYTHONHASHSEED=0  # [win]
   - export PYTHONHASHSEED=0  # [not win]
