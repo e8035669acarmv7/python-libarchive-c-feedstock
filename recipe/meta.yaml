@@ -14,16 +14,16 @@ source:
     - 0001-Add-zstd-support.patch
 
 build:
-  number: 1003
+  number: 1004
   script:
   - set PYTHONHASHSEED=0  # [win]
   - export PYTHONHASHSEED=0  # [not win]
-  - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  - "{{ PYTHON }} setup.py install --single-version-externally-managed --record=record.txt"
 
 requirements:
   host:
     - python
-    - pip
+    - setuptools
   run:
     - libarchive
     - python
