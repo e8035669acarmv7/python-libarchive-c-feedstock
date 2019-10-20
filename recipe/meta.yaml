@@ -13,7 +13,7 @@ source:
 build:
   number: 0
   script:
-    - "{{ PYTHON }} -c \"import shutil; shutil.rmtree('tests')\""  # [win]
+    - rd /s /q tests  # [win]
     - "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
