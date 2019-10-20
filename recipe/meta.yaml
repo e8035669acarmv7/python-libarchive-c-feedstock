@@ -26,7 +26,7 @@ requirements:
 
 test:
   source_files:
-    - tests  # [win]
+    - tests  # [unix]
     - README.rst
   files:
     - test/hello_world.xar
