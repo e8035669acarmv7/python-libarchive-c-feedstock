@@ -1,7 +1,6 @@
 {% set pypi = "libarchive-c" %}
 {% set name = "python-libarchive-c" %}
-{% set version = "2.8" %}
-{% set sha256 = "06d44d5b9520bdac93048c72b7ed66d11a6626da16d2086f9aad079674d8e061" %}
+{% set version = "2.9" %}
 
 package:
   name: {{ name }}
@@ -9,38 +8,47 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ pypi[0] }}/{{ pypi }}/{{ pypi }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    - 0001-Add-zstd-support.patch
+  sha256: 9919344cec203f5db6596a29b5bc26b07ba9662925a05e24980b84709232ef60
 
 build:
-  number: 1004
+  number: 0
   script:
-  - set PYTHONHASHSEED=0  # [win]
-  - export PYTHONHASHSEED=0  # [not win]
-  - "{{ PYTHON }} setup.py install --single-version-externally-managed --record=record.txt"
+    - rd /s /q tests  # [win]
+    - "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
+    - pip
     - python
-    - setuptools
   run:
     - libarchive
     - python
 
 test:
+  source_files:
+    - tests  # [unix]
+    - README.rst
   files:
     - test/hello_world.xar
   imports:
     - libarchive
+  requires:
+    - mock
+    - pytest-cov
   commands:
     - python -c "import libarchive; libarchive.extract_file('test/hello_world.xar')"  # [not win]
     - python -c "import libarchive; libarchive.extract_file('test\\hello_world.xar')"  # [win]
+    - python -c "import os, shutil, libarchive; shutil.copytree(os.path.dirname(libarchive.__file__), 'libarchive')"  # [unix]
+    - pytest --cov libarchive -vv  # [linux]
+    - pytest --cov libarchive -vv -k "not test_fd and not test_files and not test_buffers"  # [osx]
 
 about:
   home: https://github.com/Changaco/python-libarchive-c
   license: CC0-1.0
+  license_family: CC
   summary: Python interface to libarchive
+  license_file: cc0-1.0.txt
+
 
 extra:
   recipe-maintainers:
