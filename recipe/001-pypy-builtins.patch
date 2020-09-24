@@ -1,0 +1,15 @@
+--- tests/surrogateescape.py	2016-11-29 13:03:26.000000000 -0500
++++ tests/surrogateescape.py	2020-09-24 08:41:30.005515345 -0400
+@@ -12,7 +12,11 @@
+ import codecs
+
+
+-chr = __builtins__.get('unichr', chr)
++try:
++    chr = __builtins__.get('unichr', chr)
++except:
++    # pypy's builtins don't support get
++    pass
+
+
+ def surrogateescape(exc):
