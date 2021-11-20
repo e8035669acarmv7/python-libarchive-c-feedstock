@@ -10,10 +10,10 @@ source:
     sha256: 618a7ecfbfb58ca15e11e3138d4a636498da3b6bc212811af158298530fbb87e
   - folder: src
     url: https://github.com/Changaco/python-libarchive-c/archive/refs/tags/{{ version }}.tar.gz
-    sha256: bef034fbc403feacc4d28e71520eff6a1fcc4a677f0bec5324f68ea084c8c103
+    sha256: 1223ef47b1547a34eeaca529ef511a8593fecaf7054cb46e62775d8ccc1a6e5c
 
 build:
-  number: 0
+  number: 1
   script:
     - cd dist && {{ PYTHON }} -m pip install . -vv
 
