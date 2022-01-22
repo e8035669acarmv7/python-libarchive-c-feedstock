@@ -1,4 +1,4 @@
-{% set version = "3.2" %}
+{% set version = "4.0" %}
 
 package:
   name: python-libarchive-c
@@ -7,10 +7,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
-    sha256: 21ad493f4628972fc82440bff54c834a9fbe13be3893037a4bad332b9ee741e5
+    sha256: a5b41ade94ba58b198d778e68000f6b7de41da768de7140c984f71d7fa8416e5
   - folder: src
     url: https://github.com/Changaco/python-libarchive-c/archive/refs/tags/{{ version }}.tar.gz
-    sha256: e09bd195f72646472f7514145f8f65fd371444d9c98123cd6ec7555048d57045
+    sha256: b95ee73b98ef133c4be1cf6751d249baf1119aa35cad4f36137fa1b4c93a52ac
 
 build:
   number: 0
