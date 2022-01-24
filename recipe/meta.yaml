@@ -1,21 +1,18 @@
-{% set version = "3.2" %}
+{% set version = "4.0" %}
 
 package:
   name: python-libarchive-c
   version: {{ version }}
 
 source:
-  - folder: dist
-    url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
-    sha256: 21ad493f4628972fc82440bff54c834a9fbe13be3893037a4bad332b9ee741e5
-  - folder: src
-    url: https://github.com/Changaco/python-libarchive-c/archive/refs/tags/{{ version }}.tar.gz
-    sha256: e09bd195f72646472f7514145f8f65fd371444d9c98123cd6ec7555048d57045
-
+  - url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
+    sha256: a5b41ade94ba58b198d778e68000f6b7de41da768de7140c984f71d7fa8416e5
+    patches:
+      # TODO: follow up with upstream https://github.com/Changaco/python-libarchive-c/pull/120
+      - 0000-read-with-utf8.patch
 build:
   number: 0
-  script:
-    - cd dist && {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -30,8 +27,8 @@ requirements:
 
 test:
   source_files:
-    - src/tests  # [unix]
-    - src/README.rst
+    - tests  # [unix]
+    - README.rst
   files:
     - test/hello_world.xar
   imports:
@@ -42,9 +39,9 @@ test:
   commands:
     - python -c "import libarchive; libarchive.extract_file('test/hello_world.xar')"  # [not win]
     - python -c "import libarchive; libarchive.extract_file('test\\hello_world.xar')"  # [win]
-    - python -c "import os, shutil, libarchive; shutil.copytree(os.path.dirname(libarchive.__file__), 'src/libarchive')"  # [unix]
-    - cd src && pytest -vv --cov libarchive --cov-report term-missing:skip-covered --cov-fail-under=90  # [linux]
-    - cd src && pytest -vv --cov libarchive -k "not (test_fd or test_files or test_buffers or atime_ctime or custom_writer)"  # [osx]
+    - python -c "import os, shutil, libarchive; shutil.copytree(os.path.dirname(libarchive.__file__), 'libarchive')"  # [unix]
+    - pytest -vv --cov libarchive --cov-report term-missing:skip-covered --cov-fail-under=85  # [linux]
+    - pytest -vv --cov libarchive -k "not (test_fd or test_files or test_buffers or atime_ctime or custom_writer)"  # [osx]
 
 about:
   home: https://github.com/Changaco/python-libarchive-c

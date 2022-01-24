@@ -1,0 +1,26 @@
+diff --git a/setup.py b/setup.py
+index cc65cd4..dc6a4f0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -16,7 +16,7 @@ setup(
+     url='https://github.com/Changaco/python-libarchive-c',
+     license='CC0',
+     packages=find_packages(exclude=['tests']),
+-    long_description=open(join(dirname(__file__), 'README.rst')).read(),
++    long_description=open(join(dirname(__file__), 'README.rst'), encoding="utf-8").read(),
+     long_description_content_type='text/x-rst',
+     keywords='archive libarchive 7z tar bz2 zip gz',
+ )
+diff --git a/version.py b/version.py
+index 9e02db9..dfb5489 100644
+--- a/version.py
++++ b/version.py
+@@ -35,7 +35,7 @@ def get_version():
+ 
+     else:
+         # Extract the version from the PKG-INFO file.
+-        with open(join(d, 'PKG-INFO')) as f:
++        with open(join(d, 'PKG-INFO'), encoding="utf-8") as f:
+             version = version_re.search(f.read()).group(1)
+ 
+     return version
