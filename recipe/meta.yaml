@@ -5,17 +5,14 @@ package:
   version: {{ version }}
 
 source:
-  - folder: dist
-    url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
+  - url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
     sha256: a5b41ade94ba58b198d778e68000f6b7de41da768de7140c984f71d7fa8416e5
-  - folder: src
-    url: https://github.com/Changaco/python-libarchive-c/archive/refs/tags/{{ version }}.tar.gz
-    sha256: b95ee73b98ef133c4be1cf6751d249baf1119aa35cad4f36137fa1b4c93a52ac
-
+    patches:
+      # TODO: follow up with upstream https://github.com/Changaco/python-libarchive-c/pull/120
+      - 0000-read-version-utf8.patch
 build:
   number: 0
-  script:
-    - cd dist && {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -30,8 +27,8 @@ requirements:
 
 test:
   source_files:
-    - src/tests  # [unix]
-    - src/README.rst
+    - tests  # [unix]
+    - README.rst
   files:
     - test/hello_world.xar
   imports:
@@ -42,9 +39,9 @@ test:
   commands:
     - python -c "import libarchive; libarchive.extract_file('test/hello_world.xar')"  # [not win]
     - python -c "import libarchive; libarchive.extract_file('test\\hello_world.xar')"  # [win]
-    - python -c "import os, shutil, libarchive; shutil.copytree(os.path.dirname(libarchive.__file__), 'src/libarchive')"  # [unix]
-    - cd src && pytest -vv --cov libarchive --cov-report term-missing:skip-covered --cov-fail-under=90  # [linux]
-    - cd src && pytest -vv --cov libarchive -k "not (test_fd or test_files or test_buffers or atime_ctime or custom_writer)"  # [osx]
+    - python -c "import os, shutil, libarchive; shutil.copytree(os.path.dirname(libarchive.__file__), 'libarchive')"  # [unix]
+    - pytest -vv --cov libarchive --cov-report term-missing:skip-covered --cov-fail-under=85  # [linux]
+    - pytest -vv --cov libarchive -k "not (test_fd or test_files or test_buffers or atime_ctime or custom_writer)"  # [osx]
 
 about:
   home: https://github.com/Changaco/python-libarchive-c
