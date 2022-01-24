@@ -9,7 +9,7 @@ source:
     sha256: a5b41ade94ba58b198d778e68000f6b7de41da768de7140c984f71d7fa8416e5
     patches:
       # TODO: follow up with upstream https://github.com/Changaco/python-libarchive-c/pull/120
-      - 0000-read-version-utf8.patch
+      - 0000-read-with-utf8.patch
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
