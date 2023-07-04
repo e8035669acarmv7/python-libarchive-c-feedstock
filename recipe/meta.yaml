@@ -9,7 +9,7 @@ source:
   sha256: d673f56673d87ec740d1a328fa205cafad1d60f5daca4685594deb039d32b159
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -45,8 +45,9 @@ about:
   license: CC0-1.0
   license_family: CC
   summary: Python interface to libarchive
-  license_file: cc0-1.0.txt
-
+  license_file: 
+    - cc0-1.0.txt
+    - LICENSE.md
 
 extra:
   recipe-maintainers:
