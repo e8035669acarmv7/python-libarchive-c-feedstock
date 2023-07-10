@@ -12,8 +12,8 @@ build:
   script: 
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     # https://github.com/conda-forge/python-libarchive-c-feedstock/issues/35
-    - rm -f {{ SRC_DIR }}/tests/data/프로그램.*  # [unix]
-    - del /F /Q {{ SRC_DIR }}\\tests\\data\\프로그램.*  # [win]
+    - {{ PYTHON }} {{ RECIPE_DIR }}/delete_unicode_files.py  # [unix]
+    - {{ PYTHON }} {{ RECIPE_DIR }}\\delete_unicode_files.py  # [win]
   skip: true  # [py<38]
 
 requirements:
