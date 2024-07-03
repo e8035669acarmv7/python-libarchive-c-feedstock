@@ -1,4 +1,4 @@
-{% set version = "5.0" %}
+{% set version = "5.1" %}
 
 package:
   name: python-libarchive-c
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/l/libarchive-c/libarchive-c-{{ version }}.tar.gz
-  sha256: d673f56673d87ec740d1a328fa205cafad1d60f5daca4685594deb039d32b159
+  sha256: 7bcce24ea6c0fa3bc62468476c6d2f6264156db2f04878a372027c10615a2721
 build:
-  number: 1
-  script: 
+  number: 0
+  script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     # https://github.com/conda-forge/python-libarchive-c-feedstock/issues/35
     - cd {{ RECIPE_DIR }}
@@ -49,7 +49,7 @@ about:
   license: CC0-1.0
   license_family: CC
   summary: Python interface to libarchive
-  license_file: 
+  license_file:
     - cc0-1.0.txt
     - LICENSE.md
 
